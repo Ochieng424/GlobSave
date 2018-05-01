@@ -2,7 +2,7 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
+    android:id="@+id/logIn_ParentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -47,31 +47,35 @@
             </android.support.v7.widget.AppCompatTextView>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/signInEmailWrap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Username"
-                android:textColorHint="@android:color/white">
+                android:hint="Email"
+                android:textColorHint="@color/colorHint">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/signInEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/white"
                     android:textSize="15sp"
                     app:backgroundTint="@android:color/white" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/signInPasswordWrap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Password"
-                android:textColorHint="@android:color/white"
+                android:textColorHint="@color/colorHint"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@android:color/white">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/signInPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -82,24 +86,24 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
-                android:layout_width="match_parent"
                 android:id="@+id/sign_in"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/sign_in"
                 android:fontFamily="sans-serif"
+                android:text="@string/sign_in"
                 android:textColor="@android:color/white" />
 
             <android.support.v7.widget.AppCompatButton
-                android:layout_width="match_parent"
                 android:id="@+id/sign_up"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create Account"
-                android:textColor="@android:color/white"
+                android:background="@drawable/button_signup_beh"
                 android:fontFamily="sans-serif-light"
-                android:textSize="14sp"
+                android:text="Create Account"
                 android:textAllCaps="false"
-                android:background="@drawable/button_signup_beh"/>
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
 
 
         </android.support.v7.widget.LinearLayoutCompat>

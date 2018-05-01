@@ -2,7 +2,7 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
+    android:id="@+id/signUp_ParentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -54,14 +54,16 @@
                 android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtFirstNameWrap"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_weight="0.5"
                     android:hint="Firstname"
-                    android:textColorHint="@android:color/white">
+                    android:textColorHint="@color/colorHint">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/txtFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
@@ -71,14 +73,16 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtLastNameWrap"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_weight="0.5"
                     android:hint="Lastname"
-                    android:textColorHint="@android:color/white">
+                    android:textColorHint="@color/colorHint">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/txtLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
@@ -90,47 +94,35 @@
             </android.support.v7.widget.LinearLayoutCompat>
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Username"
-                android:textColorHint="@android:color/white">
-
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp"
-                    app:backgroundTint="@android:color/white" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtEmailWrap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Email"
-                android:textColorHint="@android:color/white">
+                android:textColorHint="@color/colorHint">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/white"
                     android:textSize="15sp"
                     app:backgroundTint="@android:color/white" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtPasswordWrap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Password"
-                android:textColorHint="@android:color/white"
+                android:textColorHint="@color/colorHint"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@android:color/white">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -141,15 +133,17 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtConfirmPasswordWrap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Confirm Password"
-                android:textColorHint="@android:color/white"
+                android:textColorHint="@color/colorHint"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@android:color/white">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txtConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -163,11 +157,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:id="@+id/btnSignUp"
                 android:fontFamily="sans-serif"
                 android:text="SIGN UP"
                 android:textColor="@android:color/white" />
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/log_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_signup_beh"

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1087699580212",
+    "firebase_url": "https://globsave-922b7.firebaseio.com",
+    "project_id": "globsave-922b7",
+    "storage_bucket": "globsave-922b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087699580212:android:f9e116c5fbaf72ff",
+        "android_client_info": {
+          "package_name": "com.example.ochieng_derrick.globsave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087699580212-2lpr1f7tgo6nr1j53g3rs2gcl6vgi7r1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ochieng_derrick.globsave",
+            "certificate_hash": "e48022137408a39eecfd061831a5f1e40ab4cf9a"
+          }
+        },
+        {
+          "client_id": "1087699580212-pd5rq6sb9jddet7v5jegl2o7ccmjmrrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwcTnm872iKs3S2XCJyYithuYgaHD-jhQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087699580212-pd5rq6sb9jddet7v5jegl2o7ccmjmrrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
