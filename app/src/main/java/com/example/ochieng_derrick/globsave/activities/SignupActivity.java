@@ -1,17 +1,29 @@
-package com.example.ochieng_derrick.globsave;
+package com.example.ochieng_derrick.globsave.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
+import com.example.ochieng_derrick.globsave.R;
+import com.example.ochieng_derrick.globsave.models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.regex.Pattern;
 
@@ -25,6 +37,8 @@ public class SignupActivity extends AppCompatActivity {
 
 
     private FirebaseAnalytics mFirebaseAnalytics;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +47,12 @@ public class SignupActivity extends AppCompatActivity {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        // Obtain the FirebaseAuth instance.
+        mAuth = FirebaseAuth.getInstance();
+
+        // Obtain the FirebaseFirestore instance.
+        db = FirebaseFirestore.getInstance();
 
         signUp_parent = findViewById(R.id.signUp_ParentLayout);
         txtFirstNameWrap = findViewById(R.id.txtFirstNameWrap);
@@ -60,50 +80,50 @@ public class SignupActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = txtFirstName.getText().toString().trim();
-                String lastName = txtLastName.getText().toString().trim();
-                String email = txtEmail.getText().toString().trim();
+                final String firstName = txtFirstName.getText().toString().trim();
+                final String lastName = txtLastName.getText().toString().trim();
+                final String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString();
                 String confirmPassword = txtConfirmPassword.getText().toString();
 
                 if (firstName.isEmpty())
                     txtFirstNameWrap.setError("Enter First Name");
-                else{
+                else {
                     txtFirstNameWrap.setError(null);
                     txtFirstNameWrap.setErrorEnabled(false);
                 }
 
                 if (lastName.isEmpty())
                     txtLastNameWrap.setError("Enter Last Name");
-                else{
+                else {
                     txtLastNameWrap.setError(null);
                     txtLastNameWrap.setErrorEnabled(false);
                 }
 
                 if (email.isEmpty())
                     txtEmailWrap.setError("Enter Email");
-                else{
+                else {
                     txtEmailWrap.setError(null);
                     txtEmailWrap.setErrorEnabled(false);
                 }
 
                 if (!isValidEmail(email))
                     txtEmailWrap.setError("Invalid email");
-                else{
+                else {
                     txtEmailWrap.setError(null);
                     txtEmailWrap.setErrorEnabled(false);
                 }
 
                 if (password.isEmpty())
                     txtPasswordWrap.setError("Enter Password");
-                else{
+                else {
                     txtPasswordWrap.setError(null);
                     txtPasswordWrap.setErrorEnabled(false);
                 }
 
                 if (password.length() < 6)
                     txtPasswordWrap.setError("minimum password length is 6");
-                else{
+                else {
                     txtPasswordWrap.setError(null);
                     txtPasswordWrap.setErrorEnabled(false);
                 }
@@ -123,7 +143,40 @@ public class SignupActivity extends AppCompatActivity {
                         && password.length() >= 6
                         && confirmPassword.equals(password)) {
 
-                    Snackbar.make(signUp_parent, "All is well", Snackbar.LENGTH_LONG).show();
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                        User user = new User(firebaseUser.getUid(), firstName, lastName, email);
+                                        // Add new user to collection
+                                        db.collection("users").document(firebaseUser.getUid())
+                                                .set(user)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        startActivity(new Intent(
+                                                                SignupActivity.this,
+                                                                MainActivity.class));
+
+                                                        // Clears previous activities on stack
+                                                        ActivityCompat.finishAffinity(SignupActivity.this);
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w("SignupActivity", "Failed to write user to database", e);
+                                                        Snackbar.make(signUp_parent, "An error occurred..Try again", Snackbar.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                    } else {
+                                        Log.w("SignupActivity", "Failed to create user", task.getException());
+                                        Snackbar.make(signUp_parent, "An error occurred..Try again", Snackbar.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                 }
             }
         });

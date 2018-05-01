@@ -1,8 +1,9 @@
-package com.example.ochieng_derrick.globsave;
+package com.example.ochieng_derrick.globsave.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.ochieng_derrick.globsave.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
